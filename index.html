@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html land="en">
-  <head>
-    <title>This is my web</title>
-  </head>
-  <body>
-    <h1>This is the title</h1>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h1>API service</h1>
+    <script>
+
+        const getdata = fetch("http://127.0.0.1:3000")
+            .then(res => res.json())
+            .then((data) => console.log(data));
+            
+    </script>
+</body>
 </html>
