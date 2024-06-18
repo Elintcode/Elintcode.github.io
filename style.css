@@ -1,4 +1,8 @@
 body {
-  background-color: "grey";
-  color: "blue";
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
 }
