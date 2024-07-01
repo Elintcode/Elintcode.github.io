@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="PWA app by Robert Alvarez">
+    <style>
+        body {
+        background-color: darkcyan;
+        color: white
+        }
+    </style>
+    <title>Record Manager App</title>
+</head>
+<body>
+    <h3>Record Manager</h3>
+    <div id="greeter">text line</div>
+    <button onclick="greet()">Greet</button>
+    <script>
+        function greet() {
+            document.getElementById('greeter').textContent = "Hello";
+        };
+
+        if ('serviceWorker' in navigator) {
+    	   navigator.serviceWorker.register('sw.js');
+	};
+    
+    </script>
+</body>
+</html>
