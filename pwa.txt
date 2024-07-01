@@ -1,0 +1,83 @@
+PWA requirements:
+
+render as web https and its required secured, not http
+
+HTML head elements:
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="description" content="PWA mobile app by Robert Alvarez">
+
+javascript file:
+	if ('serviceWorker' in navigator) {
+    	   navigator.serviceWorker.register('sw.js');
+	};
+
+manifest.json:
+{
+    "name": "FoodPoints",
+    "short_name": "FoodPoints",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": " #000000",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "icon.png",
+            "type": "image/png",
+            "sizes": "144x144",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "bigicon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
+
+
+
+serviceworker or sw.js:
+console.log("service worker inside sw.js");
+
+const cacheName = "app-shell-rsrs";
+const assets = [
+    "/",
+    "index.html",
+    "add.html",
+    "allowance.html",
+    "count.html",
+    "list.html",
+    "script.js",
+    "style.css",
+    "manifest.json",
+    "sw.js",
+    "bigicon.png",
+    "icon.png"
+]
+
+
+self.addEventListener("install", evt => {
+    console.log("service worker has been installed.");   //log in console
+    evt.waitUntil(
+    caches.open(cacheName).then(cache => {
+        cache.addAll(assets);
+        }) 
+    );
+});
+
+
+self.addEventListener("activate", evt => {
+    console.log("service worker has been activated.");   //log in console
+});
+
+
+self.addEventListener("fetch", evt => {
+    console.log(evt);                                    //log in console
+    evt.respondWith(
+        caches.match(evt.request).then(cacheRes => {
+            return cacheRes || evt.request;
+        })
+    );
+});
