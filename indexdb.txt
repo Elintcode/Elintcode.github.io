@@ -1,0 +1,47 @@
+////////////////////////////////////////// Create db or connect
+
+indexedDB:
+
+var db;
+
+function connectdb() {
+        var dbconnect = indexedDB.open("userdb");
+
+	    dbconnect.addEventListener("error", displayError);
+	    dbconnect.addEventListener("success", connectToDatabase);
+	    dbconnect.addEventListener("upgradeneeded", createDatabase);
+}
+
+
+function displayError(event) {
+	alert("Error: " + event.code + "/" + event.message);
+}
+
+
+function connectToDatabase(event) {
+	db = event.target.result;
+}
+
+
+function createDatabase(event) {
+	var database = event.target.result;
+	var db = database.createObjectStore("users", {keypath: "id"});
+	    db.createIndex("Finduser", "name", {unique: false}); 
+}
+
+
+window.addEventListener("load", connectdb);
+
+
+/////////////////////////////////////////////////////////////     Save record
+	var transactiondb = db.transaction(["users"], "readwrite");
+	var db = transactiondb.objectStore("users");
+	
+	db.add({
+		id: value,
+		name: value,
+		age: value
+		});
+
+
+		
